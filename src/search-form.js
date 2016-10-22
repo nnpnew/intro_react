@@ -1,6 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import axios from 'axios'
 
 export class SearchForm extends React.Component {
     constructor(props){
@@ -11,10 +9,9 @@ export class SearchForm extends React.Component {
     }
     onSearchClick(event){
         event.preventDefault()
-        console.log('this.onSearchClick',this.state.query)
-        axios.get(`http://www.omdbapi.com/?s=${this.state.query}s&plot=short&r=json`)
+        this.props.onSearchSubmit(this.state.query)
     }
-    onQueryChange(event){
+   onQueryChange(event){
         const query = event.target.value
         console.log('this.onQueryChange',query)
         this.setState({
@@ -22,7 +19,7 @@ export class SearchForm extends React.Component {
         })
 
     }
-    render(){
+     render(){
         return(
             <form>
                 <input type="text" value={this.state.query} 
@@ -31,4 +28,6 @@ export class SearchForm extends React.Component {
             </form>
         )
     }
+    
+
 }
